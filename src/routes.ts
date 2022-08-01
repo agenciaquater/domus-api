@@ -1,12 +1,14 @@
 import { CreateUserControler } from '@controllers/users/CreateUserController';
 import { DeleteUserController } from '@controllers/users/DeleteUserController';
 import { ListUsersController } from '@controllers/users/ListUsersController';
+import { UpdateUserController } from '@controllers/users/UpdateUserController';
 import express from 'express';
 const router = express.Router();
 
 const listUsersController = new ListUsersController();
 const createUserController = new CreateUserControler();
 const deleUserController = new DeleteUserController();
+const updateUserController = new UpdateUserController();
 
 router.get('/', (req, res) => {
   res.json({ message: 'pedrao' });
@@ -36,6 +38,16 @@ router.post('/users/delete-user', async (req, res) => {
   const { email } = req.body;
   try {
     const user = await deleUserController.execute(email);
+    res.status(200).json({ user });
+  } catch (error) {
+    res.status(400).json({ error });
+  }
+});
+
+router.post('/users/update-user', async (req, res) => {
+  const { data } = req.body;
+  try {
+    const user = await updateUserController.execute(data);
     res.status(200).json({ user });
   } catch (error) {
     res.status(400).json({ error });
