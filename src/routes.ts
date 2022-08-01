@@ -1,8 +1,10 @@
-import { CreateUserControler } from '@controllers/users/CreateUserController';
-import { DeleteUserController } from '@controllers/users/DeleteUserController';
-import { ListUsersController } from '@controllers/users/ListUsersController';
-import { UpdateUserController } from '@controllers/users/UpdateUserController';
 import express from 'express';
+import {
+  CreateUserControler,
+  DeleteUserController,
+  ListUsersController,
+  UpdateUserController,
+} from './controllers/users';
 const router = express.Router();
 
 const listUsersController = new ListUsersController();
@@ -50,6 +52,7 @@ router.post('/users/update-user', async (req, res) => {
     const user = await updateUserController.execute(data);
     res.status(200).json({ user });
   } catch (error) {
+    console.log(error);
     res.status(400).json({ error });
   }
 });
