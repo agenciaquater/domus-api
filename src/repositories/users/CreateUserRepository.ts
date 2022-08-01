@@ -15,7 +15,6 @@ export class CreateUserRepository {
           id: true,
         },
       });
-      console.log(createdUser);
       return createdUser;
     } catch (e) {
       throw new Error(e);

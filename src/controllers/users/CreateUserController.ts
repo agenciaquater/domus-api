@@ -7,8 +7,8 @@ export class CreateUserControler {
     const createUserRepository = new CreateUserRepository();
     const loadUserByEmailRepository = new LoadUserByEmailRepository();
 
-    const userAlreadyExists = loadUserByEmailRepository.load(data.email);
-    if (!!userAlreadyExists) {
+    const userAlreadyExists = await loadUserByEmailRepository.load(data.email);
+    if (userAlreadyExists) {
       throw new Error('User already exists');
     }
     try {
