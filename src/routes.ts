@@ -1,4 +1,5 @@
 import { CreateAddressController } from '@controllers/address/CreateAddressController';
+import { ListAddressByUserEmailController } from '@controllers/address/ListAddressByUserEmailController';
 import express from 'express';
 import {
   CreateUserControler,
@@ -14,6 +15,7 @@ const deleUserController = new DeleteUserController();
 const updateUserController = new UpdateUserController();
 
 const createAddressController = new CreateAddressController();
+const listAddressByUserEmailController = new ListAddressByUserEmailController();
 
 router.get('/', (req, res) => {
   res.json({ message: 'pedrao' });
@@ -76,6 +78,16 @@ router.post('/addresses/create-address', async (req, res) => {
     });
 
     res.status(200).json({ address });
+  } catch (error) {
+    res.status(400).json({ error });
+  }
+});
+
+router.get('/addresses/:email', async (req, res) => {
+  const email = req.params.email;
+  try {
+    const addresses = await listAddressByUserEmailController.execute(email);
+    res.status(200).json({ addresses });
   } catch (error) {
     res.status(400).json({ error });
   }
