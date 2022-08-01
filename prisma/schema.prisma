@@ -12,14 +12,14 @@ datasource db {
 
 model User {
   id         String    @id @default(uuid())
-  full_name  String
+  full_name  String?
   email      String    @unique
   cpf        String    @unique
   password   String
-  phone      String
-  birth_date DateTime
+  phone      String?
+  birth_date DateTime?
   created_at DateTime  @default(now())
-  updated_at DateTime
+  updated_at DateTime @default(now())
   addresses  Address[]
 }
 
