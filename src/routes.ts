@@ -1,4 +1,6 @@
 import { CreateAttendanceController } from '@controllers/attendance/CreateAttendanceController';
+import { DeleteAttendanceController } from '@controllers/attendance/DeleteAttendanceController';
+import { ListAttendanceByUserEmailController } from '@controllers/attendance/ListAttendanceByUserEmailController';
 import express from 'express';
 import {
   CreateAddressController,
@@ -25,6 +27,9 @@ const deleteAddressController = new DeleteAddressController();
 const updateAddressController = new UpdateAddressController();
 
 const createAttendanceController = new CreateAttendanceController();
+const listAttendancesByUserEmailController =
+  new ListAttendanceByUserEmailController();
+const deleteAttendanceController = new DeleteAttendanceController();
 
 router.get('/', (req, res) => {
   res.json({ message: 'pedrao' });
@@ -141,6 +146,28 @@ router.post('/attendances/create-attendance', async (req, res) => {
       description,
       userId,
     });
+    res.status(200).json({ attendance });
+  } catch (error) {
+    res.status(400).json({ error });
+  }
+});
+
+router.get('/attendances/:email', async (req, res) => {
+  const email = req.params.email;
+  try {
+    const attendances = await listAttendancesByUserEmailController.execute(
+      email
+    );
+    res.status(200).json({ attendances });
+  } catch (error) {
+    res.status(400).json({ error });
+  }
+});
+
+router.post('/attendances/delete-attendance', async (req, res) => {
+  const { id } = req.body;
+  try {
+    const attendance = await deleteAttendanceController.execute(id);
     res.status(200).json({ attendance });
   } catch (error) {
     res.status(400).json({ error });
