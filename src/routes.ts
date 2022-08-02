@@ -1,6 +1,7 @@
 import { CreateAddressController } from '@controllers/address/CreateAddressController';
 import { DeleteAddressController } from '@controllers/address/DeleteAddressRepository';
 import { ListAddressByUserEmailController } from '@controllers/address/ListAddressByUserEmailController';
+import { UpdateAddressController } from '@controllers/address/UpdateAddressController';
 import express from 'express';
 import {
   CreateUserControler,
@@ -18,6 +19,7 @@ const updateUserController = new UpdateUserController();
 const createAddressController = new CreateAddressController();
 const listAddressByUserEmailController = new ListAddressByUserEmailController();
 const deleteAddressController = new DeleteAddressController();
+const updateAddressController = new UpdateAddressController();
 
 router.get('/', (req, res) => {
   res.json({ message: 'pedrao' });
@@ -100,6 +102,27 @@ router.post('/addresses/delete-address', async (req, res) => {
   try {
     const addresses = await deleteAddressController.execute(id);
     res.status(200).json({ addresses });
+  } catch (error) {
+    res.status(400).json({ error });
+  }
+});
+
+router.post('/addresses/update-address', async (req, res) => {
+  const { street, number, apt, neighborhood, state, city, id } = req.body;
+  try {
+    const address = await updateAddressController.execute(
+      {
+        street,
+        number,
+        apt,
+        neighborhood,
+        state,
+        city,
+      },
+      id
+    );
+
+    res.status(200).json({ address });
   } catch (error) {
     res.status(400).json({ error });
   }
