@@ -1,8 +1,11 @@
-import { CreateAddressController } from '@controllers/address/CreateAddressController';
-import { DeleteAddressController } from '@controllers/address/DeleteAddressRepository';
-import { ListAddressByUserEmailController } from '@controllers/address/ListAddressByUserEmailController';
-import { UpdateAddressController } from '@controllers/address/UpdateAddressController';
+import { CreateAttendanceController } from '@controllers/attendance/CreateAttendanceController';
 import express from 'express';
+import {
+  CreateAddressController,
+  DeleteAddressController,
+  ListAddressByUserEmailController,
+  UpdateAddressController,
+} from './controllers/address';
 import {
   CreateUserControler,
   DeleteUserController,
@@ -20,6 +23,8 @@ const createAddressController = new CreateAddressController();
 const listAddressByUserEmailController = new ListAddressByUserEmailController();
 const deleteAddressController = new DeleteAddressController();
 const updateAddressController = new UpdateAddressController();
+
+const createAttendanceController = new CreateAttendanceController();
 
 router.get('/', (req, res) => {
   res.json({ message: 'pedrao' });
@@ -123,6 +128,20 @@ router.post('/addresses/update-address', async (req, res) => {
     );
 
     res.status(200).json({ address });
+  } catch (error) {
+    res.status(400).json({ error });
+  }
+});
+
+// ATTENDANCE CRUD ROUTES
+router.post('/attendances/create-attendance', async (req, res) => {
+  const { description, userId } = req.body;
+  try {
+    const attendance = await createAttendanceController.execute({
+      description,
+      userId,
+    });
+    res.status(200).json({ attendance });
   } catch (error) {
     res.status(400).json({ error });
   }
