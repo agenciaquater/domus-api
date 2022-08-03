@@ -9,6 +9,18 @@ export class ListAttendanceByUserEmailRepository {
             email,
           },
         },
+        select: {
+          id: true,
+          description: true,
+          created_at: true,
+          user: {
+            select: {
+              id: true,
+              full_name: true,
+              email: true,
+            },
+          },
+        },
       });
 
       return attendances;
