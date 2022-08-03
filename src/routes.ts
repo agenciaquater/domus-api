@@ -5,7 +5,7 @@ import express from 'express';
 import {
   CreateAddressController,
   DeleteAddressController,
-  ListAddressByUserEmailController,
+  ListAddressByUserIdController,
   UpdateAddressController,
 } from './controllers/address';
 import {
@@ -24,7 +24,7 @@ const updateUserController = new UpdateUserController();
 const loadUserWithAddressController = new LoadUserWithAddressController();
 
 const createAddressController = new CreateAddressController();
-const listAddressByUserEmailController = new ListAddressByUserEmailController();
+const listAddressByUserIdController = new ListAddressByUserIdController();
 const deleteAddressController = new DeleteAddressController();
 const updateAddressController = new UpdateAddressController();
 
@@ -105,10 +105,10 @@ router.post('/addresses/create-address', async (req, res) => {
   }
 });
 
-router.get('/addresses/:email', async (req, res) => {
-  const email = req.params.email;
+router.get('/addresses/:id', async (req, res) => {
+  const id = req.params.id;
   try {
-    const addresses = await listAddressByUserEmailController.execute(email);
+    const addresses = await listAddressByUserIdController.execute(id);
     res.status(200).json({ addresses });
   } catch (error) {
     res.status(400).json({ error });

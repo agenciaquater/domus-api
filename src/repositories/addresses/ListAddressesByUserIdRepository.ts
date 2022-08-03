@@ -1,12 +1,12 @@
 import { client } from 'src/services/prisma';
 
-export class ListAddressByUserEmailRepository {
-  async index(email: string) {
+export class ListAddressByUserIdRepository {
+  async index(id: string) {
     try {
       const addresses = await client.address.findMany({
         where: {
           user: {
-            email,
+            id,
           },
         },
       });
