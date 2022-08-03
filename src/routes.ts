@@ -12,6 +12,7 @@ import {
   CreateUserControler,
   DeleteUserController,
   ListUsersController,
+  LoadUserWithAddressController,
   UpdateUserController,
 } from './controllers/users';
 const router = express.Router();
@@ -20,6 +21,7 @@ const listUsersController = new ListUsersController();
 const createUserController = new CreateUserControler();
 const deleUserController = new DeleteUserController();
 const updateUserController = new UpdateUserController();
+const loadUserWithAddressController = new LoadUserWithAddressController();
 
 const createAddressController = new CreateAddressController();
 const listAddressByUserEmailController = new ListAddressByUserEmailController();
@@ -39,6 +41,12 @@ router.get('/', (req, res) => {
 router.get('/users', async (req, res) => {
   const users = await listUsersController.execute();
   res.status(200).json({ users });
+});
+
+router.get('/users/:email', async (req, res) => {
+  const email = req.params.email;
+  const user = await loadUserWithAddressController.execute(email);
+  res.status(200).json({ user });
 });
 
 router.post('/users/create-user', async (req, res) => {

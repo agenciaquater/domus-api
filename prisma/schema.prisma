@@ -10,6 +10,11 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum Role {
+  USER
+  ADMIN
+}
+
 model User {
   id         String       @id @default(uuid())
   full_name  String?
@@ -20,6 +25,7 @@ model User {
   birth_date DateTime?
   created_at DateTime     @default(now())
   updated_at DateTime     @default(now())
+  role       Role         @default(USER)
   addresses  Address[]
   Attendance Attendance[]
 }

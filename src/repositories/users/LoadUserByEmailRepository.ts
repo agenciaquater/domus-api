@@ -9,6 +9,7 @@ export class LoadUserByEmailRepository {
       select: {
         email: true,
         id: true,
+        role: true,
       },
     });
 
