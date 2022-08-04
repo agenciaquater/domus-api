@@ -5,8 +5,7 @@
   "main": "index.js",
   "engines": {
     "node": ">=16",
-    "npm": ">=8",
-    "yarn": "pls-use-npm"
+    "npm": ">=8"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
