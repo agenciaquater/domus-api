@@ -1,6 +1,6 @@
 import { CreateAttendanceController } from '@controllers/attendance/CreateAttendanceController';
 import { DeleteAttendanceController } from '@controllers/attendance/DeleteAttendanceController';
-import { ListAttendanceByUserEmailController } from '@controllers/attendance/ListAttendanceByUserEmailController';
+import { ListAttendanceByUserIdController } from '@controllers/attendance/ListAttendanceByUserIdController';
 import express from 'express';
 import {
   CreateAddressController,
@@ -29,8 +29,8 @@ const deleteAddressController = new DeleteAddressController();
 const updateAddressController = new UpdateAddressController();
 
 const createAttendanceController = new CreateAttendanceController();
-const listAttendancesByUserEmailController =
-  new ListAttendanceByUserEmailController();
+const listAttendancesByUserIdController =
+  new ListAttendanceByUserIdController();
 const deleteAttendanceController = new DeleteAttendanceController();
 
 router.get('/', (req, res) => {
@@ -160,12 +160,10 @@ router.post('/attendances/create-attendance', async (req, res) => {
   }
 });
 
-router.get('/attendances/:email', async (req, res) => {
-  const email = req.params.email;
+router.get('/attendances/:id', async (req, res) => {
+  const id = req.params.id;
   try {
-    const attendances = await listAttendancesByUserEmailController.execute(
-      email
-    );
+    const attendances = await listAttendancesByUserIdController.execute(id);
     res.status(200).json({ attendances });
   } catch (error) {
     res.status(400).json({ error });

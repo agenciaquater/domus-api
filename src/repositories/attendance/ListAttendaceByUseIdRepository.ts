@@ -1,12 +1,12 @@
 import { client } from 'src/services/prisma';
 
-export class ListAttendanceByUserEmailRepository {
-  async index(email: string) {
+export class ListAttendanceByUserIdRepository {
+  async index(id: string) {
     try {
       const attendances = await client.attendance.findMany({
         where: {
           user: {
-            email,
+            id,
           },
         },
         select: {
