@@ -1,5 +1,5 @@
-import { CreateAddressRepository } from '@repositories/addresses/CreateAddressRepository';
 import { Address } from '../../models/Address';
+import { CreateAddressRepository } from '../../repositories/addresses/CreateAddressRepository';
 
 export class CreateAddressController {
   async execute(data: Address) {

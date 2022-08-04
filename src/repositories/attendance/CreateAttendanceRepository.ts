@@ -1,5 +1,5 @@
-import { client } from 'src/services/prisma';
 import { Attendance } from '../../models/Attendance';
+import { client } from '../../services/prisma';
 
 export class CreateAttendanceRepository {
   async create(data: Attendance) {

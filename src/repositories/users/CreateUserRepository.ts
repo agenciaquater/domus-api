@@ -1,5 +1,5 @@
-import { client } from 'src/services/prisma';
 import { User } from '../../models/User';
+import { client } from '../../services/prisma';
 
 export class CreateUserRepository {
   async create(user: User) {

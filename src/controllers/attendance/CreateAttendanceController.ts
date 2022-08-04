@@ -1,5 +1,5 @@
-import { CreateAttendanceRepository } from '@repositories/attendance/CreateAttendanceRepository';
 import { Attendance } from '../../models/Attendance';
+import { CreateAttendanceRepository } from '../../repositories/attendance/CreateAttendanceRepository';
 
 export class CreateAttendanceController {
   async execute(data: Attendance) {

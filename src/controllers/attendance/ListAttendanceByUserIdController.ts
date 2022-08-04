@@ -1,4 +1,4 @@
-import { ListAttendanceByUserIdRepository } from '@repositories/attendance/ListAttendaceByUseIdRepository';
+import { ListAttendanceByUserIdRepository } from '../../repositories/attendance/ListAttendaceByUseIdRepository';
 
 export class ListAttendanceByUserIdController {
   async execute(id: string) {

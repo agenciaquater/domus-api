@@ -1,4 +1,4 @@
-import { LoadUserWithAddressRepository } from '@repositories/users/LoadUserWithAddresRepository';
+import { LoadUserWithAddressRepository } from '../../repositories/users/LoadUserWithAddresRepository';
 
 export class LoadUserWithAddressController {
   async execute(email: string) {

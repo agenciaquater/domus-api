@@ -1,5 +1,5 @@
-import { UpdateAddressRepository } from '@repositories/addresses/UpdateAddressRepository';
 import { Address } from '../../models/Address';
+import { UpdateAddressRepository } from '../../repositories/addresses/UpdateAddressRepository';
 
 export class UpdateAddressController {
   async execute(data: Omit<Address, 'userId'>, id: string) {

@@ -1,4 +1,4 @@
-import { client } from 'src/services/prisma';
+import { client } from '../../services/prisma';
 
 export class ListAttendanceByUserIdRepository {
   async index(id: string) {

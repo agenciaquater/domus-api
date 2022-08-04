@@ -1,5 +1,5 @@
-import { client } from 'src/services/prisma';
 import { Address } from '../../models/Address';
+import { client } from '../../services/prisma';
 
 export class CreateAddressRepository {
   async create(data: Address) {

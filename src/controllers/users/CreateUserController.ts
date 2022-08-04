@@ -1,6 +1,6 @@
-import { CreateUserRepository } from '@repositories/users/CreateUserRepository';
-import { LoadUserByEmailRepository } from '@repositories/users/LoadUserByEmailRepository';
 import { User } from '../../models/User';
+import { CreateUserRepository } from '../../repositories/users/CreateUserRepository';
+import { LoadUserByEmailRepository } from '../../repositories/users/LoadUserByEmailRepository';
 
 export class CreateUserControler {
   async execute(data: User) {

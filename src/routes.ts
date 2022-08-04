@@ -1,6 +1,3 @@
-import { CreateAttendanceController } from '@controllers/attendance/CreateAttendanceController';
-import { DeleteAttendanceController } from '@controllers/attendance/DeleteAttendanceController';
-import { ListAttendanceByUserIdController } from '@controllers/attendance/ListAttendanceByUserIdController';
 import express from 'express';
 import {
   CreateAddressController,
@@ -8,6 +5,9 @@ import {
   ListAddressByUserIdController,
   UpdateAddressController,
 } from './controllers/address';
+import { CreateAttendanceController } from './controllers/attendance/CreateAttendanceController';
+import { DeleteAttendanceController } from './controllers/attendance/DeleteAttendanceController';
+import { ListAttendanceByUserIdController } from './controllers/attendance/ListAttendanceByUserIdController';
 import {
   CreateUserControler,
   DeleteUserController,

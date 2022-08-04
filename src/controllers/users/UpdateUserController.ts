@@ -1,5 +1,5 @@
-import { UpdateUserRepository } from '@repositories/users/UpdateUserRepository';
 import { User } from '../../models/User';
+import { UpdateUserRepository } from '../../repositories/users/UpdateUserRepository';
 
 export class UpdateUserController {
   async execute(data: User) {

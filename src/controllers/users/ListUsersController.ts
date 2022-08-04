@@ -1,4 +1,4 @@
-import { ListUsersRepository } from '@repositories/users/ListUsersRepository';
+import { ListUsersRepository } from '../../repositories/users/ListUsersRepository';
 
 export class ListUsersController {
   async execute() {

@@ -1,4 +1,4 @@
-import { DeleteAttendanceRepository } from '@repositories/attendance/DeleteAttendanceRepository';
+import { DeleteAttendanceRepository } from '../../repositories/attendance/DeleteAttendanceRepository';
 
 export class DeleteAttendanceController {
   async execute(id: string) {

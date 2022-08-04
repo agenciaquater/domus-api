@@ -1,4 +1,4 @@
-import { DeleteUserRepository } from '@repositories/users/DeleteUserRepository';
+import { DeleteUserRepository } from '../../repositories/users/DeleteUserRepository';
 
 export class DeleteUserController {
   async execute(email: string) {
