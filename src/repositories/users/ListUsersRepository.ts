@@ -11,7 +11,7 @@ export class ListUsersRepository {
         id: true,
         phone: true,
         role: true,
-        addresses: true,
+        Attendance: true,
       },
     });
 
