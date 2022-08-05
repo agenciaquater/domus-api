@@ -9,10 +9,12 @@ export class CreateUserRepository {
           cpf: user.cpf,
           email: user.email,
           password: user.password,
+          full_name: user.full_name,
         },
         select: {
           email: true,
           id: true,
+          full_name: true,
         },
       });
       return createdUser;

@@ -50,12 +50,13 @@ router.get('/users/:email', async (req, res) => {
 });
 
 router.post('/users/create-user', async (req, res) => {
-  const { cpf, email, password } = req.body;
+  const { cpf, email, password, full_name } = req.body;
   try {
     const user = await createUserController.execute({
       cpf,
       email,
       password,
+      full_name,
     });
 
     res.status(200).json({ user });
