@@ -10,6 +10,7 @@ export class LoadUserByEmailRepository {
         email: true,
         id: true,
         role: true,
+        password: true,
       },
     });
 

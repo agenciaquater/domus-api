@@ -1,3 +1,4 @@
+import { LoginUserController } from '@controllers/users/LoginUserController';
 import express from 'express';
 import {
   CreateAddressController,
@@ -34,6 +35,7 @@ const createAttendanceController = new CreateAttendanceController();
 const listAttendancesByUserIdController =
   new ListAttendanceByUserIdController();
 const deleteAttendanceController = new DeleteAttendanceController();
+const loginUserController = new LoginUserController();
 
 router.get('/', (req, res) => {
   res.json({ message: 'pedrao' });
@@ -72,6 +74,18 @@ router.post('/users/create-user', async (req, res) => {
     });
 
     res.status(200).json({ user });
+  } catch (error) {
+    res.status(400).json({ error });
+  }
+});
+
+// LOGIN USER
+router.post('/user/login', async (req, res) => {
+  const { email, password } = req.body;
+  try {
+    const login = await loginUserController.execute(email, password);
+
+    res.status(200).json({ login });
   } catch (error) {
     res.status(400).json({ error });
   }
