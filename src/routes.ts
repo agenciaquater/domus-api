@@ -12,6 +12,7 @@ import {
   CreateUserControler,
   DeleteUserController,
   ListUsersController,
+  LoadUserByIdController,
   LoadUserWithAddressController,
   UpdateUserController,
 } from './controllers/users';
@@ -22,6 +23,7 @@ const createUserController = new CreateUserControler();
 const deleUserController = new DeleteUserController();
 const updateUserController = new UpdateUserController();
 const loadUserWithAddressController = new LoadUserWithAddressController();
+const loadUserByIdController = new LoadUserByIdController();
 
 const createAddressController = new CreateAddressController();
 const listAddressByUserIdController = new ListAddressByUserIdController();
@@ -47,6 +49,16 @@ router.get('/users/:email', async (req, res) => {
   const email = req.params.email;
   const user = await loadUserWithAddressController.execute(email);
   res.status(200).json({ user });
+});
+
+router.get('/users/load/:id', async (req, res) => {
+  const id = req.params.id;
+  try {
+    const user = await loadUserByIdController.execute(id);
+    res.status(200).json({ user });
+  } catch (error) {
+    res.status(400).json({ error });
+  }
 });
 
 router.post('/users/create-user', async (req, res) => {
