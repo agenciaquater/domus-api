@@ -15,6 +15,7 @@ export class LoginUserController {
       if (!userAlreadyExists) {
         throw new Error('User not found');
       }
+
       bcrypt.compare(password, userAlreadyExists.password, (err, res) => {
         if (err) {
           throw new Error('Cannot login');
@@ -31,7 +32,7 @@ export class LoginUserController {
             }
           );
 
-          return {
+          let retorno = {
             message: 'Login success',
             token: token,
             data: {
@@ -39,6 +40,12 @@ export class LoginUserController {
               role: userAlreadyExists.role,
             },
           };
+
+          console.log(retorno);
+
+          return retorno;
+        } else {
+          return 'Wrong password';
         }
       });
     } catch (e) {
