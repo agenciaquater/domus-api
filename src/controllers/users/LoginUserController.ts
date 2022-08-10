@@ -1,6 +1,6 @@
 import { LoadUserByEmailRepository } from '@repositories/users/LoadUserByEmailRepository';
 import bcrypt from 'bcrypt';
-import jwtSign from 'jsonwebtoken';
+import jwt from 'jsonwebtoken';
 
 export class LoginUserController {
   async execute(email: string, password: string) {
@@ -10,44 +10,38 @@ export class LoginUserController {
       throw new Error('Missing params');
     }
     try {
-      const userAlreadyExists = await loadUserByEmailRepository.load(email);
+      const user = await loadUserByEmailRepository.load(email);
 
-      if (!userAlreadyExists) {
+      if (!user) {
         throw new Error('User not found');
       }
 
-      bcrypt.compare(password, userAlreadyExists.password, (err, res) => {
-        if (err) {
-          throw new Error('Cannot login');
+      const passwordsMatch = bcrypt.compareSync(password, user.password);
+
+      if (!passwordsMatch) {
+        throw new Error('Incorrect Password');
+      }
+
+      const token = jwt.sign(
+        {
+          id: user.id,
+          email: user.email,
+        },
+        'bcrypt-token',
+        {
+          expiresIn: '1h',
         }
-        if (res) {
-          const token = jwtSign.sign(
-            {
-              id: userAlreadyExists.id,
-              email: userAlreadyExists.email,
-            },
-            'bcrypt-token',
-            {
-              expiresIn: '1h',
-            }
-          );
+      );
 
-          let retorno = {
-            message: 'Login success',
-            token: token,
-            data: {
-              email: userAlreadyExists.email,
-              role: userAlreadyExists.role,
-            },
-          };
-
-          console.log(retorno);
-
-          return retorno;
-        } else {
-          return 'Wrong password';
-        }
-      });
+      return {
+        message: 'Login success',
+        token: token,
+        data: {
+          email: user.email,
+          role: user.role,
+          id: user.id,
+        },
+      };
     } catch (e) {
       throw new Error(e);
     }
