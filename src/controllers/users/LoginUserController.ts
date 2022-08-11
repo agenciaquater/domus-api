@@ -1,6 +1,6 @@
-import { LoadUserByEmailRepository } from '@repositories/users/LoadUserByEmailRepository';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import { LoadUserByEmailRepository } from '../../repositories/users/LoadUserByEmailRepository';
 
 export class LoginUserController {
   async execute(email: string, password: string) {
