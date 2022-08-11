@@ -1,4 +1,3 @@
-import { LoginUserController } from '@controllers/users/LoginUserController';
 import express from 'express';
 import {
   CreateAddressController,
@@ -17,6 +16,7 @@ import {
   LoadUserWithAddressController,
   UpdateUserController,
 } from './controllers/users';
+import { LoginUserController } from './controllers/users/LoginUserController';
 const router = express.Router();
 
 const listUsersController = new ListUsersController();
