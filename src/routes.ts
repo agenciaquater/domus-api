@@ -1,9 +1,10 @@
+import { RecoverUserInfo } from '@controllers/users/RecoverUserInfo';
 import express from 'express';
 import {
   CreateAddressController,
   DeleteAddressController,
   ListAddressByUserIdController,
-  UpdateAddressController,
+  UpdateAddressController
 } from './controllers/address';
 import { CreateAttendanceController } from './controllers/attendance/CreateAttendanceController';
 import { DeleteAttendanceController } from './controllers/attendance/DeleteAttendanceController';
@@ -14,7 +15,7 @@ import {
   ListUsersController,
   LoadUserByIdController,
   LoadUserWithAddressController,
-  UpdateUserController,
+  UpdateUserController
 } from './controllers/users';
 import { LoginUserController } from './controllers/users/LoginUserController';
 const router = express.Router();
@@ -25,6 +26,7 @@ const deleUserController = new DeleteUserController();
 const updateUserController = new UpdateUserController();
 const loadUserWithAddressController = new LoadUserWithAddressController();
 const loadUserByIdController = new LoadUserByIdController();
+const recoverUserInfo = new RecoverUserInfo();
 
 const createAddressController = new CreateAddressController();
 const listAddressByUserIdController = new ListAddressByUserIdController();
@@ -85,6 +87,16 @@ router.post('/user/login', async (req, res) => {
   try {
     const login = await loginUserController.execute(email, password);
     res.status(200).json({ login });
+  } catch (error) {
+    res.status(400).json({ error });
+  }
+});
+
+router.post('/user/recover-user', async (req, res) => {
+  const { token } = req.body;
+  try {
+    const user = await recoverUserInfo.handle(token);
+    res.status(200).json({ user });
   } catch (error) {
     res.status(400).json({ error });
   }

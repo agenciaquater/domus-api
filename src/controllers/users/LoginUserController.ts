@@ -26,6 +26,7 @@ export class LoginUserController {
         {
           id: user.id,
           email: user.email,
+          role: user.role,
         },
         'bcrypt-token',
         {
