@@ -1,10 +1,9 @@
-import { RecoverUserInfo } from '@controllers/users/RecoverUserInfo';
 import express from 'express';
 import {
   CreateAddressController,
   DeleteAddressController,
   ListAddressByUserIdController,
-  UpdateAddressController
+  UpdateAddressController,
 } from './controllers/address';
 import { CreateAttendanceController } from './controllers/attendance/CreateAttendanceController';
 import { DeleteAttendanceController } from './controllers/attendance/DeleteAttendanceController';
@@ -15,9 +14,10 @@ import {
   ListUsersController,
   LoadUserByIdController,
   LoadUserWithAddressController,
-  UpdateUserController
+  UpdateUserController,
 } from './controllers/users';
 import { LoginUserController } from './controllers/users/LoginUserController';
+import { RecoverUserInfo } from './controllers/users/RecoverUserInfo';
 const router = express.Router();
 
 const listUsersController = new ListUsersController();
