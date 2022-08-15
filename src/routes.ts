@@ -66,13 +66,15 @@ router.get('/users/load/:id', async (req, res) => {
 });
 
 router.post('/users/create-user', async (req, res) => {
-  const { cpf, email, password, full_name } = req.body;
+  const { cpf, email, password, full_name, type, role } = req.body;
   try {
     const user = await createUserController.execute({
       cpf,
       email,
       password,
       full_name,
+      type,
+      role,
     });
 
     res.status(200).json({ user });
@@ -186,11 +188,12 @@ router.post('/addresses/update-address', async (req, res) => {
 
 // ATTENDANCE CRUD ROUTES
 router.post('/attendances/create-attendance', async (req, res) => {
-  const { description, userId } = req.body;
+  const { description, userId, author } = req.body;
   try {
     const attendance = await createAttendanceController.execute({
       description,
       userId,
+      author,
     });
     res.status(200).json({ attendance });
   } catch (error) {

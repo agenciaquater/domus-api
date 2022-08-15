@@ -3,33 +3,27 @@ import { User } from '../../models/User';
 import { client } from '../../services/prisma';
 
 export class CreateUserRepository {
-  async create(user: User) {
+  async create(data: User) {
     try {
-      const createdUser = bcrypt.hash(
-        user.password,
-        10,
-        async (err, encrypted) => {
-          if (err) {
-            throw new Error(err.message);
-          }
-          const userWithHashedPassword = await client.user.create({
-            data: {
-              cpf: user.cpf,
-              email: user.email,
-              password: encrypted,
-              full_name: user.full_name,
-            },
-            select: {
-              email: true,
-              id: true,
-              full_name: true,
-            },
-          });
-          return userWithHashedPassword;
-        }
-      );
+      const salt = bcrypt.genSaltSync(10);
+      const hashedPassword = bcrypt.hashSync(data.password, salt);
 
-      return createdUser;
+      const user = await client.user.create({
+        data: {
+          cpf: data.cpf as string,
+          email: data.email,
+          password: hashedPassword,
+          full_name: data.full_name,
+          type: data.type,
+          role: data.role,
+        },
+        select: {
+          email: true,
+          id: true,
+          full_name: true,
+        },
+      });
+      return user;
     } catch (e) {
       throw new Error(e);
     }
