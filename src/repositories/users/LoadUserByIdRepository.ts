@@ -13,6 +13,10 @@ export class LoadUserByIdRepository {
           cpf: true,
           role: true,
           phone: true,
+          birth_date: true,
+          type: true,
+          id: true,
+          addresses: true,
         },
       });
 
