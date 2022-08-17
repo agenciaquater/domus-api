@@ -13,6 +13,7 @@ export class ListAttendanceByUserIdRepository {
           id: true,
           description: true,
           created_at: true,
+          author: true,
           user: {
             select: {
               id: true,
