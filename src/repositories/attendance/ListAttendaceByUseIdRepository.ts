@@ -19,6 +19,7 @@ export class ListAttendanceByUserIdRepository {
               id: true,
               full_name: true,
               email: true,
+              type: true,
             },
           },
         },
