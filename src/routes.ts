@@ -127,9 +127,9 @@ router.post('/users/update-user', async (req, res) => {
   }
 });
 
-router.get('/users/customers', async (req, res) => {
+router.get('/customers', async (req, res) => {
   const users = await loadCustomersController.execute();
-  res.status(200).json({ users });
+  return res.status(200).json({ users });
 });
 
 // ADDRESS CRUD ROUTES
