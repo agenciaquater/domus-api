@@ -16,6 +16,7 @@ import {
   LoadUserWithAddressController,
   UpdateUserController,
 } from './controllers/users';
+import { LoadCustomersController } from './controllers/users/LoadCustomersController';
 import { LoginUserController } from './controllers/users/LoginUserController';
 import { RecoverUserInfo } from './controllers/users/RecoverUserInfo';
 const router = express.Router();
@@ -27,6 +28,7 @@ const updateUserController = new UpdateUserController();
 const loadUserWithAddressController = new LoadUserWithAddressController();
 const loadUserByIdController = new LoadUserByIdController();
 const recoverUserInfo = new RecoverUserInfo();
+const loadCustomersController = new LoadCustomersController();
 
 const createAddressController = new CreateAddressController();
 const listAddressByUserIdController = new ListAddressByUserIdController();
@@ -123,6 +125,11 @@ router.post('/users/update-user', async (req, res) => {
     console.log(error);
     res.status(400).json({ error });
   }
+});
+
+router.get('/users/customers', async (req, res) => {
+  const users = await loadCustomersController.execute();
+  res.status(200).json({ users });
 });
 
 // ADDRESS CRUD ROUTES
