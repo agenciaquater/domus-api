@@ -13,7 +13,6 @@ export class LoadUserWithAddressRepository {
           full_name: true,
           cpf: true,
           birth_date: true,
-          password: true,
           phone: true,
           role: true,
           addresses: {

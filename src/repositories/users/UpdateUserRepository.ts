@@ -11,6 +11,15 @@ export class UpdateUserRepository {
         data: {
           ...data,
         },
+        select: {
+          id: true,
+          email: true,
+          birth_date: true,
+          cpf: true,
+          phone: true,
+          role: true,
+          type: true,
+        },
       });
 
       return user;
