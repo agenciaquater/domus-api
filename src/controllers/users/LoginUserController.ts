@@ -30,7 +30,7 @@ export class LoginUserController {
         },
         'bcrypt-token',
         {
-          expiresIn: '1h',
+          expiresIn: '2h',
         }
       );
 
