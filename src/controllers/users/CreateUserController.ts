@@ -16,7 +16,7 @@ export class CreateUserControler {
 
       return user;
     } catch (e) {
-      throw new Error(e);
+      throw new Error(e.message);
     }
   }
 }
