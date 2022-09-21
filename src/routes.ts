@@ -19,6 +19,7 @@ import {
 import { LoadCustomersController } from './controllers/users/LoadCustomersController';
 import { LoginUserController } from './controllers/users/LoginUserController';
 import { RecoverUserInfo } from './controllers/users/RecoverUserInfo';
+import { UpdateUserPasswordController } from './controllers/users/UpdateUserPasswordController';
 const router = express.Router();
 
 const listUsersController = new ListUsersController();
@@ -29,6 +30,7 @@ const loadUserWithAddressController = new LoadUserWithAddressController();
 const loadUserByIdController = new LoadUserByIdController();
 const recoverUserInfo = new RecoverUserInfo();
 const loadCustomersController = new LoadCustomersController();
+const updateUserPasswordController = new UpdateUserPasswordController();
 
 const createAddressController = new CreateAddressController();
 const listAddressByUserIdController = new ListAddressByUserIdController();
@@ -124,6 +126,16 @@ router.post('/users/update-user', async (req, res) => {
   } catch (error) {
     console.log(error);
     res.status(400).json({ error });
+  }
+});
+
+router.post('/users/update-password', async (req, res) => {
+  const { password, email } = req.body;
+  try {
+    const user = await updateUserPasswordController.update(password, email);
+    res.status(200).json({ user });
+  } catch (error) {
+    res.status(500).json({ error });
   }
 });
 
