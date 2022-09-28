@@ -14,7 +14,7 @@ model User {
   id         String       @id @default(uuid())
   full_name  String?
   email      String       @unique
-  cpf        String?       @unique
+  cpf        String?
   password   String
   type       String
   role       String 
