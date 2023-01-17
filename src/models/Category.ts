@@ -4,6 +4,6 @@ export interface Category {
   id?: string;
   name: string;
   parent_category?: Category | undefined;
-  child_category: Category[]
-  Product: Product[]
+  child_category?: Category[] | undefined
+  Product?: Product[] | undefined
 }
