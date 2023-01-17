@@ -17,7 +17,7 @@ model User {
   cpf        String?
   password   String
   type       String
-  role       String 
+  role       String
   phone      String?
   birth_date DateTime?
   created_at DateTime     @default(now())
@@ -48,4 +48,44 @@ model Attendance {
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
   userId     String
+}
+
+model Product {
+  id            String    @id @default(uuid())
+  name          String
+  description   String
+  price         Int
+  sale_price    Int?
+  reference     Int       @default(autoincrement())
+  volume        Int
+  recipient     String
+  store         Int
+  grape         String
+  color         String
+  scent         String
+  harmonization String
+  matchId       String?
+  match         Product?  @relation("product_product", fields: [matchId], references: [id])
+  matches       Product[] @relation("product_product")
+  category      Category  @relation(fields: [categoryId], references: [id])
+  
+  created_at    DateTime  @default(now())
+  updated_at    DateTime  @updatedAt
+  categoryId    String
+
+  @@map("product")
+}
+
+model Category {
+  id                String     @id @default(uuid())
+  name              String
+  parent_categoryId String?
+  parent_category   Category?  @relation("category_category", fields: [parent_categoryId], references: [id])
+  child_category    Category[] @relation("category_category")
+  Product           Product[]
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@map("category")
 }
