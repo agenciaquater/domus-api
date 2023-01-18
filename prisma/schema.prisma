@@ -67,11 +67,11 @@ model Product {
   matchId       String?
   match         Product?  @relation("product_product", fields: [matchId], references: [id])
   matches       Product[] @relation("product_product")
-  category      Category  @relation(fields: [categoryId], references: [id])
-  
-  created_at    DateTime  @default(now())
-  updated_at    DateTime  @updatedAt
-  categoryId    String
+  category      Category? @relation(fields: [categoryId], references: [id])
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  categoryId String
 
   @@map("product")
 }
