@@ -1,5 +1,5 @@
-import { client } from "src/services/prisma";
 import { Product } from "../../models/Product";
+import { client } from "../../services/prisma";
 
 export class CreateProductRepository {
   async create(data: Product) {

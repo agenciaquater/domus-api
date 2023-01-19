@@ -1,4 +1,4 @@
-import { client } from "src/services/prisma"
+import { client } from "../../services/prisma";
 
 export class UpdateProductRepository {
   async update(id: string, data: any) {

@@ -1,4 +1,4 @@
-import { client } from "src/services/prisma"
+import { client } from "../../services/prisma";
 
 export class DeleteCategoryRepository {
   async delete(categoryId: string) {

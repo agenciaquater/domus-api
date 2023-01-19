@@ -1,5 +1,5 @@
-import { Product } from "@prisma/client"
-import { client } from "src/services/prisma"
+import { Product } from "@prisma/client";
+import { client } from "../../services/prisma";
 
 export class LoadCategoryProductsRepository {
   async load(categoryId: string) {
