@@ -11,11 +11,20 @@ export class CreateOrderRepository {
             connect: data.items
           },
           address: {
-            connect: data.address
+            connect: {
+              id: data.address
+            }
           },
           user: {
-            connect: data.user
+            connect: {
+              id: data.user
+            }
           }
+        },
+        include: {
+          address: true,
+          items: true,
+          user: true
         }
       })
 
