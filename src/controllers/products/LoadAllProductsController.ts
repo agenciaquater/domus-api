@@ -1,5 +1,5 @@
-import { LoadAllProductsRepository } from '@repositories/products/LoadAllProductsRepository';
 import { Request, Response } from 'express';
+import { LoadAllProductsRepository } from '../../repositories/products/LoadAllProductsRepository';
 
 export class LoadAllProductsController {
   async handle(request: Request, response: Response) {

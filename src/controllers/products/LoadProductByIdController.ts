@@ -1,5 +1,5 @@
-import { LoadProductByIdRepository } from '@repositories/products/LoadProductByIdRepository';
 import { Request, Response } from 'express';
+import { LoadProductByIdRepository } from '../../repositories/products/LoadProductByIdRepository';
 
 export class LoadProductByIdController {
   async handle(request: Request, response: Response) {
