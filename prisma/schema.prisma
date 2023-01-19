@@ -95,11 +95,12 @@ model Category {
 }
 
 model Order {
-  id          String    @id @default(uuid())
-  items       Product[]
-  address     Address   @relation(fields: [addressId], references: [id])
-  user        User      @relation(fields: [userId], references: [id])
-  total_price Int
+  id           String    @id @default(uuid())
+  items        Product[]
+  address      Address   @relation(fields: [addressId], references: [id])
+  user         User      @relation(fields: [userId], references: [id])
+  total_price  Int
+  order_number Int       @default(1)
 
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt

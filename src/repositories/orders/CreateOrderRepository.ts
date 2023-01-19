@@ -19,7 +19,8 @@ export class CreateOrderRepository {
             connect: {
               id: data.user
             }
-          }
+          },
+          order_number: data.order_number
         },
         include: {
           address: true,

@@ -5,5 +5,6 @@ export interface Order {
   items: Product[]
   address: string
   user: string
-  total_price: number
+  total_price: number,
+  order_number: number
 }
