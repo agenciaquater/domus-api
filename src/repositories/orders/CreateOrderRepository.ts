@@ -1,5 +1,6 @@
 import { Order } from "../../models/Order";
 import { client } from "../../services/prisma";
+import { defaultOrderInclude } from "./defaultOrderReturn";
 
 export class CreateOrderRepository {
   async create(data: Order) {
@@ -22,11 +23,7 @@ export class CreateOrderRepository {
           },
           order_number: data.order_number
         },
-        include: {
-          address: true,
-          items: true,
-          user: true
-        }
+        include: defaultOrderInclude
       })
 
       return order
