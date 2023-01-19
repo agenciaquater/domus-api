@@ -6,5 +6,6 @@ export interface Order {
   address: string
   user: string
   total_price: number,
-  order_number: number
+  order_number: number,
+  status?: string | undefined;
 }

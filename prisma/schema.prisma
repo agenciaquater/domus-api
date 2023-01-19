@@ -101,6 +101,7 @@ model Order {
   user         User      @relation(fields: [userId], references: [id])
   total_price  Int
   order_number Int       @default(1)
+  status       String    @default("pending")
 
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
