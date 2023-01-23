@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
-import { client } from 'src/services/prisma';
 import { CreateCategoryRepository } from '../../repositories/categories/CreateCategoryController';
+import { client } from '../../services/prisma';
 
 export class CreateCategoryController {
   async handle(request: Request, response: Response) {
