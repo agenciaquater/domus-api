@@ -67,6 +67,7 @@ model Product {
   scent         String
   harmonization String
   matchId       String?
+  images        String[]
   match         Product?  @relation("product_product", fields: [matchId], references: [id])
   matches       Product[] @relation("product_product")
   category      Category? @relation(fields: [categoryId], references: [id])

@@ -17,5 +17,6 @@ export interface Product {
   matchId?: string
   match: Product
   matches: string[]
+  images: string[]
   category?: Category | undefined  
 }

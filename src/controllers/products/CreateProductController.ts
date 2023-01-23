@@ -24,6 +24,7 @@ export class CreateProductController {
       match,
       matches,
       category,
+      images
     } = body
 
     try {
@@ -44,6 +45,7 @@ export class CreateProductController {
         match,
         matches,
         category,
+        images
       })
       response.status(200).json({ product });
     } catch (error) {
