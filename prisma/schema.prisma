@@ -72,6 +72,7 @@ model Product {
   matches       Product[] @relation("product_product")
   category      Category? @relation(fields: [categoryId], references: [id])
 
+  disabledAt DateTime?
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
   categoryId String

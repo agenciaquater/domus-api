@@ -1,14 +1,11 @@
-import { Product } from "@prisma/client";
-import { client } from "../../services/prisma";
-import { getS3ImageUrls } from "../../utils/get-s3-image-urls";
+import { Product } from "@prisma/client"
+import { client } from "../../services/prisma"
+import { getS3ImageUrls } from "../../utils/get-s3-image-urls"
 
-export class LoadAllProductsRepository {
+export class LoadDisabledProducts {
   async load() {
     try {
       const prismaProducts = await client.product.findMany({
-        where: {
-          disabledAt: null || undefined,
-        },
         include: {
           category: true,
           matches: true
@@ -20,11 +17,13 @@ export class LoadAllProductsRepository {
       let products: Product[] = []
       await Promise.all(
         prismaProducts.map(async product => {
-          const imageUrls = await getS3ImageUrls(product.images)
-          products.push({
-            ...product,
-            images: imageUrls
-          })
+          if (product.disabledAt !== null || product.disabledAt !== undefined) {
+            const imageUrls = await getS3ImageUrls(product.images)
+            products.push({
+              ...product,
+              images: imageUrls
+            })
+          }
         })
       )
       return products
