@@ -23,7 +23,7 @@ export class CreateProductController {
       matchId,
       match,
       matches,
-      category,
+      categoryId,
       images
     } = body
 
@@ -44,7 +44,7 @@ export class CreateProductController {
         matchId,
         match,
         matches,
-        category,
+        categoryId,
         images
       })
       response.status(200).json({ product });

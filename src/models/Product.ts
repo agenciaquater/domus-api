@@ -1,4 +1,3 @@
-import { Category } from "./Category";
 
 export interface Product {
   id?: string;
@@ -18,5 +17,5 @@ export interface Product {
   match: Product
   matches: string[]
   images: string[]
-  category?: Category | undefined  
+  categoryId?: string | undefined  
 }

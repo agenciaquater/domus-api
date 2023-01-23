@@ -29,7 +29,7 @@ export class CreateProductRepository {
           images: data.images,
           category: {
             connect: {
-              id: data.category?.id
+              id: data.categoryId
             }
           },
           matches: {
