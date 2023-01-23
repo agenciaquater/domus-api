@@ -1,9 +1,18 @@
 import { Product } from "../../models/Product";
 import { client } from "../../services/prisma";
 
+interface MatchArray {
+  id: string
+}
+
 export class CreateProductRepository {
   async create(data: Product) {
     try {
+      let matches: MatchArray[] = []
+      data.matches.map(match => {
+        matches.push({ id: match })
+      })
+
       const product = await client.product.create({
         data: {
           color: data.color,
@@ -23,7 +32,7 @@ export class CreateProductRepository {
             }
           },
           matches: {
-            connect: data.matches
+            connect: matches
           }
         },
         select: {

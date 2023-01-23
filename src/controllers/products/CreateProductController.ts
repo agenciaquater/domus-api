@@ -6,7 +6,6 @@ export class CreateProductController {
   async handle(request: Request, response: Response) {
     const body = request.body;
     const createProductsRepository = new CreateProductRepository()
-    console.log(body)
 
     const {
       name,
@@ -53,4 +52,4 @@ export class CreateProductController {
         .json({ message: 'Internal Server Error', error: error.message });
     }
   }
-}
+}''

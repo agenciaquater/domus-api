@@ -16,6 +16,6 @@ export interface Product {
   harmonization: string
   matchId?: string
   match: Product
-  matches: Product[]
+  matches: string[]
   category?: Category | undefined  
 }
