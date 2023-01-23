@@ -4,10 +4,10 @@ import { MulterFile } from 'src/@types/multer-file';
 
 dotenv.config()
 
-const bucketName = process.env.BUCKET_NAME as string;
-const bucketRegion = process.env.BUCKET_REGION as string;
-const accessKey = process.env.BUCKET_ACCESS_KEY as string;
-const secretAccessKey = process.env.BUCKET_SECRET_ACCESS_KEY as string;
+const bucketName = process.env.S3_BUCKET_NAME as string;
+const bucketRegion = process.env.S3_BUCKET_REGION as string;
+const accessKey = process.env.S3_BUCKET_ACCESS_KEY as string;
+const secretAccessKey = process.env.S3_BUCKET_SECRET_ACCESS_KEY as string;
 
 const client = new S3Client({
   credentials: {
@@ -17,7 +17,7 @@ const client = new S3Client({
   region: bucketRegion,
 })
 
-const createPutObjectCommand = (file: MulterFile, body: Buffer, randomFileName?: string) => {
+const createPutObjectCommand = (file: MulterFile, body: Buffer, randomFileName?: string) => {  
   const putObjectCommand = new PutObjectCommand({
     Bucket: bucketName,
     Key: randomFileName ?? file.originalname,

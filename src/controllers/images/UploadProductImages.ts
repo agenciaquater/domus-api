@@ -4,7 +4,7 @@ import s3 from '../../services/s3';
 import sharp from '../../services/sharp';
 import { generateRandomImageName } from '../../utils/generate-random-32-bytes';
 
-export class UploadProductImages {
+export class UploadFilesController {
   async handle(request: Request, response: Response) {
     const images = request.files as MulterFile[];
     const imageNames = [] as string[];
@@ -25,7 +25,7 @@ export class UploadProductImages {
       )
 
 
-      response.status(200).json({ message: 'ok' });
+      response.status(200).json({ message: 'upload successful!', files: imageNames });
     } catch (error) {
       response
         .status(500)
