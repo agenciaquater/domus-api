@@ -1,5 +1,5 @@
 import s from 'sharp';
-import { MulterFile } from "src/@types/multer-file";
+import { MulterFile } from "../@types/multer-file";
 
 const sharpResizeOptions = {
   height: 452,

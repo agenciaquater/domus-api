@@ -1,5 +1,5 @@
-import { getS3ImageUrls } from "src/utils/get-s3-image-urls";
 import { client } from "../../services/prisma";
+import { getS3ImageUrls } from "../../utils/get-s3-image-urls";
 
 export class LoadProductByIdRepository {
   async load(id: string) {
