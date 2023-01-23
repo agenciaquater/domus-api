@@ -1,4 +1,5 @@
-import { PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
+import { GetObjectAclCommand, PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
+import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import dotenv from 'dotenv';
 import { MulterFile } from 'src/@types/multer-file';
 
@@ -28,6 +29,15 @@ const createPutObjectCommand = (file: MulterFile, body: Buffer, randomFileName?:
   return putObjectCommand
 }
 
+const getImageSignedUrl = async (imageName: string): Promise<string> => {
+  const getCommand = new GetObjectAclCommand({
+    Bucket: bucketName,
+    Key: imageName
+  })
+  const signedUrl = await getSignedUrl(client, getCommand, { expiresIn: 3600 })
+  return signedUrl
+}
+
 const send = async (command: PutObjectCommand) => {
   await client.send(command)
 }
@@ -39,5 +49,6 @@ export default {
   secretAccessKey,
   client,
   createPutObjectCommand,
-  send
+  send,
+  getImageSignedUrl
 }
