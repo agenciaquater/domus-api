@@ -26,6 +26,7 @@ export class CreateProductRepository {
           store: data.store,
           volume: data.volume,
           sale_price: data.sale_price,
+          images: data.images,
           category: {
             connect: {
               id: data.category?.id
@@ -41,7 +42,8 @@ export class CreateProductRepository {
           price: true,
           sale_price: true,
           volume: true,
-          category: true
+          category: true,
+          images: true
         }
       })
 
