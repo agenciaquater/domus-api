@@ -4,7 +4,7 @@ import { client } from "../../services/prisma";
 export class CreateCategoryRepository {
   async create(data: Category) {
     try {
-      if(!data.parent_category) {
+      if(!data.parent_category_id) {
         const category = await client.category.create({
           data: {
             name: data.name,
@@ -23,7 +23,7 @@ export class CreateCategoryRepository {
           name: data.name,
           parent_category: {
             connect: {
-              id: data.parent_category?.id
+              id: data.parent_category_id
             }
           }
         }
