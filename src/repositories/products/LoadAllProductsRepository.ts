@@ -7,7 +7,7 @@ export class LoadAllProductsRepository {
     try {
       const prismaProducts = await client.product.findMany({
         where: {
-          disabledAt: null || undefined,
+          disabledAt: null,
         },
         include: {
           category: true,

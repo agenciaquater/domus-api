@@ -8,8 +8,8 @@ export class LoadDisabledProducts {
       const prismaProducts = await client.product.findMany({
         include: {
           category: true,
-          matches: true
-        }
+          matches: true,
+        },
       })
       if (!prismaProducts) {
         return null
