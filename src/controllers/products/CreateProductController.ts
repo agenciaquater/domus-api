@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import { client } from 'src/services/prisma';
 import { CreateProductRepository } from '../../repositories/products/CreateProductRepository';
 
 
@@ -28,6 +29,16 @@ export class CreateProductController {
     } = body
 
     try {
+      const productExists = await client.product.findFirst({
+        where: {
+          name,
+        }
+      })
+
+      if (productExists) {
+        response.status(400).json({message: 'A product with this name already exists!'})
+      }
+
       const product = await createProductsRepository.create({
         name,
         description,
