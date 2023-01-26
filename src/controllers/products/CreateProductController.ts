@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
-import { client } from 'src/services/prisma';
 import { CreateProductRepository } from '../../repositories/products/CreateProductRepository';
+import { client } from '../../services/prisma';
 
 
 export class CreateProductController {
