@@ -36,7 +36,7 @@ export class CreateProductController {
       })
 
       if (productExists) {
-        response.status(400).json({message: 'A product with this name already exists!'})
+        return response.status(400).json({message: 'A product with this name already exists!'})
       }
 
       const product = await createProductsRepository.create({
