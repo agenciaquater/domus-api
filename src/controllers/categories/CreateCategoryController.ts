@@ -15,7 +15,7 @@ export class CreateCategoryController {
         }
       })
       if (categoryAlreadyExists) {
-        response.status(400).json({ message: 'A category with this name alread exists!!' });
+        response.status(400).json({ message: 'A category with this name already exists!!' });
       }
       const category = await createCategoryRepository.create({
         name,
