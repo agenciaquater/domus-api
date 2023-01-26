@@ -1,5 +1,6 @@
 export * from './CreateProductController';
 export * from './DisableProducts';
+export * from './FilterProductsController';
 export * from './LoadAllProductsController';
 export * from './LoadDisabledProductsController';
 export * from './LoadProductByIdController';
