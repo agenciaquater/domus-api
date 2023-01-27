@@ -27,14 +27,16 @@ export class LoadAllProductsRepository {
       let images: Image[] = []
       await Promise.all(
         prismaProducts.map(async product => {
-          const imageUrls = await getS3ImageUrls(product.images)
-          product.images.map((image, index) => {
-            images.push(shapeToObject(image, imageUrls[index]))
-          })
-          products.push({
-            ...product,
-            images,
-          })
+          if (product.disabledAt === null || product.disabledAt === undefined) {
+            const imageUrls = await getS3ImageUrls(product.images)
+            product.images.map((image, index) => {
+              images.push(shapeToObject(image, imageUrls[index]))
+            })
+            products.push({
+              ...product,
+              images,
+            })
+          }
         })
       )
       return products

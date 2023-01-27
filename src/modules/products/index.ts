@@ -18,6 +18,6 @@ productsModule.get('/products/filter', filterProductsController.handle)
 productsModule.get('/products/:id', loadProductByIdController.handle)
 productsModule.post('/products/:id/update', updateProductController.handle)
 productsModule.put('/products/:id/disable', disableProduct.handle)
-productsModule.get('/products/disabled', loadDisabledProductsController.handle)
+productsModule.get('/disabled-products', loadDisabledProductsController.handle)
 
 export { productsModule };

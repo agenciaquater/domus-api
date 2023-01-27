@@ -1,6 +1,15 @@
-import { Product } from "@prisma/client"
-import { client } from "../../services/prisma"
-import { getS3ImageUrls } from "../../utils/get-s3-image-urls"
+import { Product } from "@prisma/client";
+import { client } from "../../services/prisma";
+import { getS3ImageUrls } from "../../utils/get-s3-image-urls";
+
+interface Image {
+  name: string;
+  url: string
+}
+
+interface ModifiedProduct extends Omit<Product, 'images'> {
+  images: Image[]
+}
 
 export class LoadDisabledProducts {
   async load() {
@@ -8,20 +17,24 @@ export class LoadDisabledProducts {
       const prismaProducts = await client.product.findMany({
         include: {
           category: true,
-          matches: true,
-        },
+          matches: true
+        }
       })
       if (!prismaProducts) {
         return null
       }
-      let products: Product[] = []
+      let products: ModifiedProduct[] = []
+      let images: Image[] = []
       await Promise.all(
         prismaProducts.map(async product => {
-          if (product.disabledAt !== null || product.disabledAt !== undefined) {
+          if (product.disabledAt !== null) {
             const imageUrls = await getS3ImageUrls(product.images)
+            product.images.map((image, index) => {
+              images.push(shapeToObject(image, imageUrls[index]))
+            })
             products.push({
               ...product,
-              images: imageUrls
+              images,
             })
           }
         })
@@ -30,5 +43,12 @@ export class LoadDisabledProducts {
     } catch (error) {
       throw new Error(error.message)
     }
+  }
+}
+
+function shapeToObject(imageName: string, imageUrl: string) {
+  return {
+    name: imageName,
+    url: imageUrl
   }
 }
