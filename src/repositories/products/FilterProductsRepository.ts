@@ -8,7 +8,15 @@ export class FilterProductsRepository {
           [key]: value
         },
         include: {
-          category: true,
+          category: {
+            include: {
+              child_category: {
+                include: {
+                  child_category: true
+                }
+              }
+            }
+          },
           matches: true
         }
       })
