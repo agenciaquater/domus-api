@@ -5,5 +5,6 @@ export * from './FilterProductsController';
 export * from './LoadAllProductsController';
 export * from './LoadDisabledProductsController';
 export * from './LoadProductByIdController';
+export * from './RetrieveCartItemsController';
 export * from './UpdateProductController';
 

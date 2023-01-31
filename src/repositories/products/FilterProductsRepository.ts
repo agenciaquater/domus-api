@@ -3,20 +3,39 @@ import { client } from "../../services/prisma"
 export class FilterProductsRepository {
   async filter(key: string, value: unknown) {
     try {
+      if (key === 'categoryId') {
+        const products = await client.product.findMany({
+          where: {
+            categoryId: key
+          },
+          select: {
+            category: {
+              select: {
+                Product: true,
+                child_category: {
+                  select: {
+                    Product: true,
+                    child_category: {
+                      select: {
+                        Product: true
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        })
+
+        return products
+      }
+      
       const products = await client.product.findMany({
         where: {
           [key]: value
         },
         include: {
-          category: {
-            include: {
-              child_category: {
-                include: {
-                  child_category: true
-                }
-              }
-            }
-          },
+          category: true,
           matches: true
         }
       })

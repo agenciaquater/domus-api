@@ -1,6 +1,6 @@
 import express from 'express';
 
-import { CreateProductController, DisableProductController, EnableProductController, FilterProductsController, LoadAllProductsController, LoadDisabledProductsController, LoadProductByIdController, UpdateProductController } from '../../controllers/products';
+import { CreateProductController, DisableProductController, EnableProductController, FilterProductsController, LoadAllProductsController, LoadDisabledProductsController, LoadProductByIdController, RetrieveCartItemsController, UpdateProductController } from '../../controllers/products';
 
 const productsModule = express.Router();
 
@@ -12,6 +12,7 @@ const disableProduct = new DisableProductController()
 const loadDisabledProductsController = new LoadDisabledProductsController()
 const filterProductsController = new FilterProductsController()
 const enableProductController = new EnableProductController()
+const retrieveCartItemsController = new RetrieveCartItemsController()
 
 productsModule.post('/products/create', createProductController.handle)
 productsModule.get('/products', loadAllProductsController.handle)
@@ -21,5 +22,6 @@ productsModule.post('/products/:id/update', updateProductController.handle)
 productsModule.put('/products/:id/disable', disableProduct.handle)
 productsModule.get('/disabled-products', loadDisabledProductsController.handle)
 productsModule.put('/products/:id/enable', enableProductController.handle)
+productsModule.post('/products/retrieve-cart', retrieveCartItemsController.handle)
 
 export { productsModule };
