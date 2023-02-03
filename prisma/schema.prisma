@@ -73,11 +73,13 @@ model Product {
   category      Category? @relation(fields: [categoryId], references: [id])
 
   disabledAt DateTime?
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+  created_at DateTime  @default(now())
+  updated_at DateTime  @updatedAt
   categoryId String
-  Order      Order?   @relation(fields: [orderId], references: [id])
+  Order      Order?    @relation(fields: [orderId], references: [id])
   orderId    String?
+  Cupom      Cupom?    @relation(fields: [cupomId], references: [id])
+  cupomId    String?
 
   @@map("product")
 }
@@ -92,6 +94,8 @@ model Category {
 
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
+  Cupom      Cupom?   @relation(fields: [cupomId], references: [id])
+  cupomId    String?
 
   @@map("category")
 }
@@ -111,4 +115,18 @@ model Order {
   userId     String
 
   @@map("order")
+}
+
+model Cupom {
+  id               String @id @default(uuid())
+  label            String
+  type             String
+  minPurchaseValue Int?
+  maxDiscountValue Int?
+
+  categories Category[]
+  products   Product[]
+
+  created_at DateTime  @default(now())
+  due_at     DateTime?
 }

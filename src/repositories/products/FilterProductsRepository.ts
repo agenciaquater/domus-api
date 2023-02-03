@@ -1,30 +1,29 @@
 import { client } from "../../services/prisma"
 
 export class FilterProductsRepository {
-  async filter(key: string, value: unknown) {
+  async filter(key: string, value: any) {
     try {
       if (key === 'categoryId') {
         const products = await client.product.findMany({
           where: {
-            categoryId: key
+            category: {
+              parent_categoryId: value
+            },
           },
-          select: {
+          include: {
             category: {
               select: {
-                Product: true,
-                child_category: {
-                  select: {
-                    Product: true,
-                    child_category: {
-                      select: {
-                        Product: true
-                      }
-                    }
-                  }
-                }
+                parent_categoryId: true
               }
             }
           }
+          // select: {
+          //   category: {
+          //     select: {
+          //       child_category: true
+          //     }
+          //   }
+          // }
         })
 
         return products
