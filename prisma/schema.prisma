@@ -121,6 +121,7 @@ model Cupom {
   id               String @id @default(uuid())
   label            String
   type             String
+  value            Int
   minPurchaseValue Int?
   maxDiscountValue Int?
 
