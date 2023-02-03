@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { CreateCupomRepository } from '../../repositories/cupons/CreateCupomRepository';
+import { LoadCupomByLabelRepository } from '../../repositories/cupons/LoadCupomByLabelController';
 
 interface ConnectArray {
   id: string
@@ -9,6 +10,7 @@ export class CreateCupomController {
   async handle(request: Request, response: Response) {
     const body = request.body;
     const createCupomRepository = new CreateCupomRepository()
+    const loadCupomRepository = new LoadCupomByLabelRepository()
 
     let categories: ConnectArray[] = [];
     let products: ConnectArray[] = [];
@@ -26,6 +28,10 @@ export class CreateCupomController {
     })
 
     try {
+      const cupomAlreadyExists = await loadCupomRepository.load(body.label)
+      if (cupomAlreadyExists) {
+        response.status(404).json({ message: "A cupom with this label already exists" })
+      }
       const cupom = await createCupomRepository.create({
         label: body.label,
         products,
