@@ -11,6 +11,6 @@ const deleteCupomController = new DeleteCupomController()
 cuponsModule.post('/cupons/create', createCupomController.handle)
 cuponsModule.get('/cupons', loadAllCuponsController.handle)
 cuponsModule.get('/cupons/:label', loadCupomByLabelController.handle)
-cuponsModule.delete('/cupons/:label/delete', deleteCupomController.handle)
+cuponsModule.delete('/cupons/:id/delete', deleteCupomController.handle)
 
 export { cuponsModule };
