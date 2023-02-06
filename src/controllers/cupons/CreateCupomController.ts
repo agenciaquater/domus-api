@@ -30,7 +30,7 @@ export class CreateCupomController {
     try {
       const cupomAlreadyExists = await loadCupomRepository.load(body.label)
       if (cupomAlreadyExists) {
-        response.status(404).json({ message: "A cupom with this label already exists" })
+        return response.status(404).json({ message: "A cupom with this label already exists" })
       }
       const cupom = await createCupomRepository.create({
         label: body.label,
