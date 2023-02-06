@@ -40,7 +40,7 @@ export class CreateCupomController {
         type: body.type,
         maxDiscountValue: body.maxDiscountValue,
         minPurchaseValue: body.minPurchaseValue,
-        due_at: body.dueAt,
+        due_at: body.due_at,
       })
       response.status(200).json({ cupom });
     } catch (error) {
