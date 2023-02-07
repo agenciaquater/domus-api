@@ -1,5 +1,10 @@
 import { client } from "../../services/prisma"
 
+const idAndName = {
+  id: true,
+  name: true,
+}
+
 export class LoadCupomByLabelRepository {
   async load(label: string) {
     try {
@@ -9,7 +14,17 @@ export class LoadCupomByLabelRepository {
         },
         include: {
           products: true,
-          categories: true
+          categories: {
+            select: {
+              ...idAndName,
+              child_category: {
+                select: {
+                  ...idAndName,
+                  child_category: true
+                }
+              }
+            }
+          }
         }
       })
       return cupom
