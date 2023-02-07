@@ -7,11 +7,5 @@
       "allowJs": true,
       "strictNullChecks": true,
       "baseUrl": ".",
-      "paths": {
-        "@controllers/*": ["./src/controllers/*"],
-        "@repositories/*": ["./src/repositories/*"],
-        "@models": ["./src/models/*"],
-        "@config": ["./src/config/*"]
-      }
   }
 }
