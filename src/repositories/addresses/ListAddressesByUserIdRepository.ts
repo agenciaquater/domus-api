@@ -9,6 +9,9 @@ export class ListAddressByUserIdRepository {
             id,
           },
         },
+        include: {
+          user: true
+        }
       });
 
       return addresses;

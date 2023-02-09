@@ -3,7 +3,7 @@ import {
   CreateAddressController,
   DeleteAddressController,
   ListAddressByUserIdController,
-  UpdateAddressController,
+  UpdateAddressController
 } from './controllers/address';
 import { CreateAttendanceController } from './controllers/attendance/CreateAttendanceController';
 import { DeleteAttendanceController } from './controllers/attendance/DeleteAttendanceController';
@@ -14,7 +14,7 @@ import {
   ListUsersController,
   LoadUserByIdController,
   LoadUserWithAddressController,
-  UpdateUserController,
+  UpdateUserController
 } from './controllers/users';
 import { LoadCustomersController } from './controllers/users/LoadCustomersController';
 import { LoginUserController } from './controllers/users/LoginUserController';
@@ -146,7 +146,7 @@ router.get('/customers', async (req, res) => {
 
 // ADDRESS CRUD ROUTES
 router.post('/addresses/create-address', async (req, res) => {
-  const { street, number, apt, neighborhood, state, city, userId } = req.body;
+  const { street, number, apt, neighborhood, state, city, userId, cep } = req.body;
   try {
     const address = await createAddressController.execute({
       street,
@@ -156,6 +156,7 @@ router.post('/addresses/create-address', async (req, res) => {
       state,
       city,
       userId,
+      cep
     });
 
     res.status(200).json({ address });
@@ -185,7 +186,7 @@ router.post('/addresses/delete-address', async (req, res) => {
 });
 
 router.post('/addresses/update-address', async (req, res) => {
-  const { street, number, apt, neighborhood, state, city, id } = req.body;
+  const { street, number, apt, neighborhood, state, city, id, cep } = req.body;
   try {
     const address = await updateAddressController.execute(
       {
@@ -195,6 +196,7 @@ router.post('/addresses/update-address', async (req, res) => {
         neighborhood,
         state,
         city,
+        cep
       },
       id
     );

@@ -18,6 +18,7 @@ export class CreateAddressRepository {
             id: true,
           },
         },
+        cep: true,
       },
     });
 
