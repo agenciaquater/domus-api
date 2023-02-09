@@ -33,6 +33,7 @@ model Address {
   number       String
   apt          String
   neighborhood String
+  cep          String @default("0")
   city         String
   state        String
   user         User?   @relation(fields: [userId], references: [id])
@@ -105,16 +106,29 @@ model Order {
   items        Product[]
   address      Address   @relation(fields: [addressId], references: [id])
   user         User      @relation(fields: [userId], references: [id])
-  total_price  Int
-  order_number Int       @default(1)
+  invoice      Invoice   @relation(fields: [invoiceId], references: [id])
+  order_number Int       @default(autoincrement())
   status       String    @default("pending")
 
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
   addressId  String
   userId     String
+  invoiceId  String
 
   @@map("order")
+}
+
+model Invoice {
+  id           String  @id @default(uuid())
+  total        Int
+  installments Int
+  cupom        Cupom?  @relation(fields: [cupomId], references: [id])
+  subtotal     Int
+  cupomId      String?
+  Order        Order[]
+
+  created_at DateTime @default(now())
 }
 
 model Cupom {
@@ -130,4 +144,5 @@ model Cupom {
 
   created_at DateTime  @default(now())
   due_at     DateTime?
+  Invoice    Invoice[]
 }
