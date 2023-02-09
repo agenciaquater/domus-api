@@ -17,14 +17,26 @@ export class FilterProductsRepository {
       if (key === 'categoryId') {
         const prismaProducts = await client.product.findMany({
           where: {
-            category: {
-              parent_categoryId: value
-            },
+            OR: [
+              {
+                category: {
+                  parent_categoryId: value
+                },
+              },
+              { categoryId: value },
+              {
+                category: {
+                  parent_category: {
+                    parent_categoryId: value
+                  }
+                }
+              }
+            ]
           },
           include: {
             category: {
               select: {
-                parent_categoryId: true
+                parent_categoryId: true,
               }
             }
           }
