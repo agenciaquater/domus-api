@@ -1,5 +1,5 @@
 export const defaultOrderInclude = {
   address: true,
-  items: true,
-  user: true
+  user: true,
+  invoice: true
 }

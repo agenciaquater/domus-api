@@ -1,11 +1,16 @@
-import { Product } from "./Product";
 
 export interface Order {
   id?: string | undefined;
-  items: Product[]
+  items: string[]
   address: string
   user: string
-  total_price: number,
+  invoice: {
+    id?: string | undefined;
+    total: number;
+    installments: number;
+    cupom?: string | undefined;
+    subtotal: number
+  },
   order_number: number,
   status?: string | undefined;
 }

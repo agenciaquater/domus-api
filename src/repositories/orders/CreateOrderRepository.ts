@@ -7,10 +7,15 @@ export class CreateOrderRepository {
     try {
       const order = await client.order.create({
         data: {
-          total_price: data.total_price,
-          items: {
-            connect: data.items
+          invoice: {
+            create: {
+              total: data.invoice.total,
+              installments: data.invoice.subtotal,
+              cupomId: data.invoice.cupom,
+              subtotal: data.invoice.subtotal
+            }
           },
+          items: data.items,
           address: {
             connect: {
               id: data.address

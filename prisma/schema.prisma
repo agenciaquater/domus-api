@@ -33,7 +33,7 @@ model Address {
   number       String
   apt          String
   neighborhood String
-  cep          String @default("0")
+  cep          String  @default("0")
   city         String
   state        String
   user         User?   @relation(fields: [userId], references: [id])
@@ -77,8 +77,6 @@ model Product {
   created_at DateTime  @default(now())
   updated_at DateTime  @updatedAt
   categoryId String
-  Order      Order?    @relation(fields: [orderId], references: [id])
-  orderId    String?
   Cupom      Cupom?    @relation(fields: [cupomId], references: [id])
   cupomId    String?
 
@@ -102,13 +100,13 @@ model Category {
 }
 
 model Order {
-  id           String    @id @default(uuid())
-  items        Product[]
-  address      Address   @relation(fields: [addressId], references: [id])
-  user         User      @relation(fields: [userId], references: [id])
-  invoice      Invoice   @relation(fields: [invoiceId], references: [id])
-  order_number Int       @default(autoincrement())
-  status       String    @default("pending")
+  id           String   @id @default(uuid())
+  items        String[]
+  address      Address  @relation(fields: [addressId], references: [id])
+  user         User     @relation(fields: [userId], references: [id])
+  invoice      Invoice  @relation(fields: [invoiceId], references: [id])
+  order_number Int      @default(autoincrement())
+  status       String   @default("pending")
 
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
