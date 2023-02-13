@@ -10,7 +10,14 @@ export class LoadOrderByOrderNumberRepository {
         include: {
           address: true,
           invoice: true,
-          user: true
+          user: {
+            select: {
+              email: true,
+              id: true,
+              full_name: true,
+              cpf: true
+            }
+          }
         }
       })
       return order
