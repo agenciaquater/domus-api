@@ -1,5 +1,12 @@
 export const defaultOrderInclude = {
   address: true,
-  user: true,
+  user: {
+    select: {
+      id: true,
+      email: true,
+      full_name: true,
+      phone: true
+    }
+  },
   invoice: true
 }
