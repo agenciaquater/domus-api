@@ -1,4 +1,4 @@
-import { GetObjectCommand, PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
+import { DeleteObjectCommand, GetObjectCommand, PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import dotenv from 'dotenv';
 import { MulterFile } from '../@types/multer-file';
@@ -38,7 +38,16 @@ const getImageSignedUrl = async (imageName: string): Promise<string> => {
   return signedUrl
 }
 
-const send = async (command: PutObjectCommand) => {
+const createDeleteObjectCommand = async (imageName: string) => {
+  const deleteObjectCommand = new DeleteObjectCommand({
+    Bucket: bucketName,
+    Key: imageName,
+  })
+
+  return deleteObjectCommand
+}
+
+const send = async (command: any) => {
   await client.send(command)
 }
 
@@ -50,5 +59,6 @@ export default {
   client,
   createPutObjectCommand,
   send,
-  getImageSignedUrl
+  getImageSignedUrl,
+  createDeleteObjectCommand
 }
