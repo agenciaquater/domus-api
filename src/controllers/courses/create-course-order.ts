@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { LoadUserByIdRepository } from 'src/repositories/users/LoadUserByIdRepository';
+import { LoadUserByIdRepository } from '../../repositories/users/LoadUserByIdRepository';
 import { sendKafkaMessage } from '../../utils/send-kafka-message';
 
 export class CreateCourseOrder {
