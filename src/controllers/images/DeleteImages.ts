@@ -4,11 +4,11 @@ import s3 from '../../services/s3';
 export class DeleteFilesController {
   async handle(request: Request, response: Response) {
     const { images } = request.body;
-
     try {
       await Promise.all(
         images.map(async (image: string) => {
-          const command = s3.createDeleteObjectCommand(image);
+          console.log(image);
+          const command = await s3.createDeleteObjectCommand(image);
           await s3.send(command);
         })
       );
