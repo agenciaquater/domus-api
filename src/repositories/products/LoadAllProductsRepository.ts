@@ -1,14 +1,14 @@
-import { Product } from "@prisma/client";
-import { client } from "../../services/prisma";
-import { getS3ImageUrls } from "../../utils/get-s3-image-urls";
+import { Product } from '@prisma/client';
+import { client } from '../../services/prisma';
+import { getS3ImageUrls } from '../../utils/get-s3-image-urls';
 
 interface Image {
   name: string;
-  url: string
+  url: string;
 }
 
 interface ModifiedProduct extends Omit<Product, 'images'> {
-  images: Image[]
+  images: Image[];
 }
 
 export class LoadAllProductsRepository {
@@ -17,31 +17,31 @@ export class LoadAllProductsRepository {
       const prismaProducts = await client.product.findMany({
         include: {
           category: true,
-          matches: true
-        }
-      })
+          matches: true,
+        },
+      });
       if (!prismaProducts) {
-        return null
+        return null;
       }
-      let products: ModifiedProduct[] = []
-      let images: Image[] = []
+      let products: ModifiedProduct[] = [];
       await Promise.all(
-        prismaProducts.map(async product => {
+        prismaProducts.map(async (product) => {
+          let images: Image[] = [];
           if (product.disabledAt === null || product.disabledAt === undefined) {
-            const imageUrls = await getS3ImageUrls(product.images)
+            const imageUrls = await getS3ImageUrls(product.images);
             product.images.map((image, index) => {
-              images.push(shapeToObject(image, imageUrls[index]))
-            })
+              images.push(shapeToObject(image, imageUrls[index]));
+            });
             products.push({
               ...product,
               images,
-            })
+            });
           }
         })
-      )
-      return products
+      );
+      return products;
     } catch (error) {
-      throw new Error(error.message)
+      throw new Error(error.message);
     }
   }
 }
@@ -49,6 +49,6 @@ export class LoadAllProductsRepository {
 function shapeToObject(imageName: string, imageUrl: string) {
   return {
     name: imageName,
-    url: imageUrl
-  }
+    url: imageUrl,
+  };
 }
